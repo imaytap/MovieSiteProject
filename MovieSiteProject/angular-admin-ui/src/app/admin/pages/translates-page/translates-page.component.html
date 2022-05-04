@@ -1,0 +1,185 @@
+<div class="row" *ngIf="languages != null && translateKeys != null">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Çeviri Ekle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="translateAddForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Çeviri</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="value"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Dil</label>
+                <select formControlName="languageId" class="form-control">
+                  <option selected></option>
+                  <option
+                    [value]="language.id"
+                    *ngFor="let language of languages"
+                  >
+                    {{ language.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Key</label>
+                <select formControlName="translateKeyId" class="form-control">
+                  <option selected></option>
+                  <option [value]="key.id" *ngFor="let key of translateKeys">
+                    {{ key.key }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+
+          <button
+            class="col btn btn-success"
+            style="margin-bottom: 10px"
+            (click)="addTranslate()"
+          >
+            Çeviri Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Çeviri Düzenle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="translateUpdateForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Çeviri</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="value"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Dil</label>
+                <select formControlName="languageId" class="form-control">
+                  <option selected></option>
+                  <option
+                    [value]="language.id"
+                    *ngFor="let language of languages"
+                  >
+                    {{ language.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Key</label>
+                <select formControlName="translateKeyId" class="form-control">
+                  <option selected></option>
+                  <option [value]="key.id" *ngFor="let key of translateKeys">
+                    {{ key.key }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div style="margin-bottom: 10px" class="row">
+          <button class="btn btn-warning col" (click)="updateTranslate()">
+            Değişiklikleri Kaydet
+          </button>
+          <div class="col"></div>
+          <button
+            class="btn btn-danger col"
+            (click)="deleteSelectedTranslate()"
+          >
+            Çeviriyi Sil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-12" *ngIf="translates != null && translates.length > 0">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Çeviriler</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Sıra</th>
+              <th>Çeviri</th>
+              <th>Dil</th>
+              <th>Key</th>
+              <th>Oluşturulma Tarihi</th>
+              <th>Güncellenme Tarihi</th>
+              <th style="float: right"></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let translate of translates; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ translate.value }}</td>
+                <td>{{ translate.language }}</td>
+                <td>{{ translate.translateKey }}</td>
+                <td>{{ translate.createdDate | date: "dd / MM / yyyy" }}</td>
+                <td>{{ translate.updatedDate | date: "dd / MM / yyyy" }}</td>
+                <td style="float: right">
+                  <a class="btn btn-info" (click)="selectTranslate(translate)">
+                    Ayrıntılar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

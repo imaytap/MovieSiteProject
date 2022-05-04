@@ -1,0 +1,291 @@
+<div class="row">
+  <!--  -->
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Kullanıcı Ekle</h5>
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="userAddForm">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="email"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Şifre</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      formControlName="password"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control" formControlName="status">
+                      <option selected></option>
+                      <option value="true">Aktif</option>
+                      <option value="false">İnaktif</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <div style="margin-bottom: 10px" class="row">
+              <button class="btn btn-danger col" (click)="clearUserAddForm()">
+                Formu Temizle
+              </button>
+              <div class="col"></div>
+              <button class="btn btn-success col" (click)="addUser()">
+                Kullanıcı Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Kullanıcı Düzenle</h5>
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="userUpdateForm">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="email"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control" formControlName="status">
+                      <option selected></option>
+                      <option value="true">Aktif</option>
+                      <option value="false">İnaktif</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card-footer">
+            <div style="margin-bottom: 10px" class="row">
+              <button class="btn btn-danger col" (click)="deleteSelectedUser()">
+                Kullanıcıyı Sil
+              </button>
+              <div class="col"></div>
+              <button class="btn btn-warning col" (click)="updateUser()">
+                Değişiklikleri Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Şifre Değiştir</h5>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="userPasswordChangeForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Yeni Şifre</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="newPassword"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer">
+          <div style="margin-bottom: 10px" class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <button class="btn btn-warning col" (click)="changePassword()">
+              Şifre Değiştir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Kullanıcıya Rol Ekle</h5>
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="userOperationClaimAddForm">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Rol</label>
+                    <select
+                      class="form-control"
+                      formControlName="operationClaimId"
+                    >
+                      <option selected></option>
+                      <option
+                        [value]="operationClaim.id"
+                        *ngFor="let operationClaim of operationClaims"
+                      >
+                        {{ operationClaim.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card-footer">
+            <div style="margin-bottom: 10px" class="row">
+              <div class="col"></div>
+              <div class="col"></div>
+              <button
+                class="btn btn-success col"
+                (click)="addUserOperationClaim()"
+              >
+                Rol Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Kullanıcıdan Rolü Kaldır</h5>
+          </div>
+
+          <div class="card-body">
+            <form [formGroup]="userOperationClaimDeleteForm">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Rol</label>
+                    <select class="form-control" formControlName="id">
+                      <option selected></option>
+                      <option
+                        [value]="operationClaim.id"
+                        *ngFor="let operationClaim of userOperationClaims"
+                      >
+                        {{ operationClaim.operationClaimName }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card-footer">
+            <div style="margin-bottom: 10px" class="row">
+              <div class="col"></div>
+              <div class="col"></div>
+              <button
+                class="btn btn-danger col"
+                (click)="deleteUserOperationClaim()"
+              >
+                Rolü Kaldır
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-12" *ngIf="users != null && users.length > 0">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Kullanıcılar</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Sıra</th>
+              <!-- <th>Nick</th> -->
+              <th>Email</th>
+              <th>Durum</th>
+              <th>Oluşturulma Tarihi</th>
+              <th>Güncelleme Tarihi</th>
+              <th style="float: right"></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users; let i = index">
+                <td>{{ i + 1 }}</td>
+                <!-- <td>{{ user.nickName }}</td> -->
+                <td>{{ user.email }}</td>
+                <td>{{ user.status ? "Aktif" : "İnaktif" }}</td>
+                <td>{{ user.createdDate | date: "dd / MM / yyyy" }}</td>
+                <td>{{ user.updatedDate | date: "dd / MM / yyyy" }}</td>
+                <td style="float: right">
+                  <a class="btn btn-info" (click)="selectUser(user)">
+                    Ayrıntılar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

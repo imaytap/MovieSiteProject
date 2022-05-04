@@ -1,0 +1,110 @@
+<div class="row">
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Key Ekle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="keyAddForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Key</label>
+                <input type="text" class="form-control" formControlName="key" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+
+          <button
+            class="col btn btn-success"
+            style="margin-bottom: 10px"
+            (click)="addKey()"
+          >
+            Key Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Key Düzenle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="keyUpdateForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Key</label>
+                <input type="text" class="form-control" formControlName="key" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div style="margin-bottom: 10px" class="row">
+          <button class="btn btn-warning col" (click)="updateKey()">
+            Değişiklikleri Kaydet
+          </button>
+          <div class="col"></div>
+          <button class="btn btn-danger col" (click)="deleteSelectedKey()">
+            Keyi Sil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-12" *ngIf="keys != null && keys?.length > 0">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Keyler</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Sıra</th>
+              <th>Key</th>
+              <th>Oluşturulma Tarihi</th>
+              <th>Güncellenme Tarihi</th>
+              <th style="float: right"></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let key of keys; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ key.key }}</td>
+                <td>{{ key.createdDate | date: "dd / MM / yyyy" }}</td>
+                <td>{{ key.updatedDate | date: "dd / MM / yyyy" }}</td>
+                <td style="float: right">
+                  <a class="btn btn-info" (click)="selectKey(key)">
+                    Ayrıntılar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

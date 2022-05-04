@@ -1,0 +1,146 @@
+<div class="row">
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Dil Ekle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="languageAddForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Dil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Kod</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+
+          <button
+            class="col btn btn-success"
+            style="margin-bottom: 10px"
+            (click)="addLanguage()"
+          >
+            Dil Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Dil Düzenle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="languageUpdateForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Dil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Kod</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div style="margin-bottom: 10px" class="row">
+          <button class="btn btn-warning col" (click)="updateLanguage()">
+            Değişiklikleri Kaydet
+          </button>
+          <div class="col"></div>
+          <button class="btn btn-danger col" (click)="deleteSelectedLanguage()">
+            Dili Sil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-12" *ngIf="languages != null && languages.length > 0">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Diller</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Sıra</th>
+              <th>Dil</th>
+              <th>Kod</th>
+              <th>Oluşturulma Tarihi</th>
+              <th>Güncellenme Tarihi</th>
+              <th style="float: right"></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let language of languages; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ language.name }}</td>
+                <td>{{ language.code }}</td>
+                <td>{{ language.createdDate | date: "dd / MM / yyyy" }}</td>
+                <td>{{ language.updatedDate | date: "dd / MM / yyyy" }}</td>
+                <td style="float: right">
+                  <a class="btn btn-info" (click)="selectLanguage(language)">
+                    Ayrıntılar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

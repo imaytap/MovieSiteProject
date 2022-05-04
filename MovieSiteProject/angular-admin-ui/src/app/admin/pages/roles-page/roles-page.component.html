@@ -1,0 +1,131 @@
+<div class="row">
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Rol Ekle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="operationClaimAddForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Rol</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+
+          <button
+            class="col btn btn-success"
+            style="margin-bottom: 10px"
+            (click)="addOperationClaim()"
+          >
+            Rol Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Rol Düzenle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="operationClaimUpdateForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Rol</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div style="margin-bottom: 10px" class="row">
+          <button class="btn btn-warning col" (click)="updateOperationClaim()">
+            Değişiklikleri Kaydet
+          </button>
+          <div class="col"></div>
+          <button
+            class="btn btn-danger col"
+            (click)="deleteSelectedOperationClaim()"
+          >
+            Rolü Sil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div
+    class="col-md-12"
+    *ngIf="operationClaims != null && operationClaims?.length > 0"
+  >
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Roller</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Sıra</th>
+              <th>Rol</th>
+              <th>Oluşturulma Tarihi</th>
+              <th>Güncellenme Tarihi</th>
+              <th style="float: right"></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let operationClaim of operationClaims; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ operationClaim.name }}</td>
+                <td>
+                  {{ operationClaim.createdDate | date: "dd / MM / yyyy" }}
+                </td>
+                <td>
+                  {{ operationClaim.updatedDate | date: "dd / MM / yyyy" }}
+                </td>
+                <td style="float: right">
+                  <a
+                    class="btn btn-info"
+                    (click)="selectOperationClaim(operationClaim)"
+                  >
+                    Ayrıntılar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
